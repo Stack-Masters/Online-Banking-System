@@ -1,0 +1,227 @@
+/* Reset and Global Styles */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Now', sans-serif;
+}
+
+/* Utility Classes */
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.grid {
+    display: grid;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+html {
+    font-size: 90%;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+.icon {
+    font-size: 1.25rem; /* --h2FontSize from SCSS */
+    cursor: pointer;
+}
+
+img,
+video {
+    height: auto;
+    width: 100%;
+}
+
+.message {
+    display: none;
+}
+
+.showMessage {
+    display: block;
+    color: #FFFFFF; /* --inputColor */
+    background: rgb(219, 30, 30);
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.btn {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    color: #777676; /* --greyColor */
+}
+
+.btn .icon {
+    margin-left: 0.5rem;
+}
+
+.btn:hover {
+    color: #FFFFFF; /* --hoverColor */
+    background: #C4A464; /* --primaryColor */
+}
+
+/* Login Page Styles */
+.loginPage {
+    height: 100vh;
+    width: 100%;
+    margin: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 7px 50px rgb(214, 223, 213);
+}
+
+.loginPage .container {
+    height: 75vh;
+    width: 70%;
+    margin: auto;
+    justify-content: space-between;
+    border-radius: 10px;
+    background: hsl(0, 3%, 81%);
+}
+
+.loginPage .container .videoDiv {
+    display: flex;
+    flex-basis: auto;
+    width: 60%;
+    height: 100%;
+    padding: 0;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: -5px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.loginPage .container .videoDiv video {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.loginPage .container .formDiv {
+    flex-basis: 50%;
+    margin: auto;
+    flex-direction: column;
+    gap: 1.5rem;
+    transform: translateY(-1rem);
+}
+
+.loginPage .container .formDiv .headerDiv {
+    text-align: center;
+    padding: 1.5rem 0;
+}
+
+.loginPage .container .formDiv .headerDiv h3 {
+    font-size: 25px;
+    color: #293C47; /* --bgColor */
+    font-weight: 600;
+}
+
+.loginPage .container .formDiv .form {
+    gap: 1rem;
+}
+
+.loginPage .container .formDiv .form .inputDiv .icon {
+    color: #777676; /* --greyColor */
+}
+
+.loginPage .container .formDiv .form .inputDiv input {
+    background: none;
+    outline: none;
+    border: none;
+    width: 200px;
+}
+
+.loginPage .container .formDiv .form .inputDiv label {
+    color: black;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 0.5rem 0;
+    display: block;
+}
+
+.loginPage .container .formDiv .form .inputDiv .input {
+    gap: 0.5rem;
+    padding: 1rem;
+    background: #FFFFFF; /* --inputColor */
+}
+
+.loginPage .container .formDiv .forgotPassword,
+.loginPage .container .formDiv .text {
+    font-size: 0.813rem; /* --smallFontSize */
+    color: #777676; /* --greyColor */
+    text-align: center;
+}
+
+.loginPage .container .formDiv .forgotPassword a,
+.loginPage .container .formDiv .text a {
+    color: #C4A464; /* --primaryColor */
+    font-weight: 500;
+}
+
+.loginPage .container .formDiv .forgotPassword a:hover,
+.loginPage .container .formDiv .text a:hover {
+    color: #FFFFFF; /* --hoverColor */
+}
+
+/* Dashboard Styles */
+.dashboard-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.dashboard-container .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.dashboard-container .header h2 {
+    margin: 0;
+}
+
+.dashboard-container .header .logout-btn {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.dashboard-container .header .logout-btn i {
+    margin-right: 5px;
+}
+
+.dashboard-container .header .logout-btn:hover {
+    background-color: #c82333;
+}
+
+/* Success Message */
+.successMessage {
+    display: block;
+    color: #FFFFFF;
+    background: #28a745; /* Green background for success */
+    text-align: center;
+    padding: 0.5rem;
+}

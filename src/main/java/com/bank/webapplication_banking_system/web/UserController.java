@@ -3,7 +3,7 @@ package com.bank.webapplication_banking_system.web;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional; // Add this import
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,18 +30,36 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
-    private AccountService accountService; // Add this to use AccountService
+    private AccountService accountService;
 
     @PostMapping("/api/register")
     @ResponseBody
-    public ResponseEntity<User> registerUser(
+    public ResponseEntity<Map<String, Object>> registerUser(
             @RequestBody Map<String, String> userData) {
-        String firstName = userData.get("firstName");
-        String lastName = userData.get("lastName");
-        String email = userData.get("email");
-        String password = userData.get("password");
-        User user = userService.registerUser(firstName, lastName, email, password);
-        return ResponseEntity.ok(user);
+        Map<String, Object> response = new HashMap<>();
+        try {
+            String firstName = userData.get("firstName");
+            String lastName = userData.get("lastName");
+            String email = userData.get("email");
+            String password = userData.get("password");
+
+            // Check if email already exists
+            if (userRepository.findByEmail(email).isPresent()) {
+                response.put("success", false);
+                response.put("message", "Email already exists");
+                return ResponseEntity.badRequest().body(response);
+            }
+
+            User user = userService.registerUser(firstName, lastName, email, password);
+            response.put("success", true);
+            response.put("message", "Successfully registered");
+            response.put("user", user);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "Registration failed: " + e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
     }
 
     @PostMapping("/api/login")
@@ -71,7 +89,7 @@ public class UserController {
     @GetMapping("/api/users/{userId}/transactions")
     @ResponseBody
     public ResponseEntity<List<Transaction>> getUserTransactions(@PathVariable Long userId) {
-        List<Transaction> transactions = accountService.getUserTransactions(userId); // Use AccountService
+        List<Transaction> transactions = accountService.getUserTransactions(userId);
         return ResponseEntity.ok(transactions);
     }
 }

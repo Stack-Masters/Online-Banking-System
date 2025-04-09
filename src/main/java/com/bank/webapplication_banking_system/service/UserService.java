@@ -17,7 +17,7 @@ public class UserService {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
-        user.setPassword(password);
+        user.setPassword(password); // In a real app, hash the password
         return userRepository.save(user);
     }
 }
