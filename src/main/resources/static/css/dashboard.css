@@ -1,0 +1,168 @@
+/* Dashboard Wrapper */
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+    background: #f5f5f5; /* Light background from provided CSS */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 200px;
+    background: #2C3E50; /* Darker sidebar background */
+    color: #FFFFFF;
+    padding: 20px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar .sidebar-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar .sidebar-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #E74C3C; /* Red accent from previous design */
+}
+
+.sidebar .sidebar-nav {
+    margin-top: 20px;
+}
+
+.sidebar .sidebar-nav .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: background 0.3s;
+}
+
+.sidebar .sidebar-nav .nav-item i {
+    margin-right: 10px;
+}
+
+.sidebar .sidebar-nav .nav-item:hover,
+.sidebar .sidebar-nav .nav-item.active {
+    background: #E74C3C; /* Red accent for hover/active */
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Container */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+h2 {
+    font-size: 18px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: #444;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+/* Accounts */
+.account {
+    margin-bottom: 15px;
+}
+
+.account-name {
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: #333;
+}
+
+.account-number {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Transactions */
+.transactions-list {
+    padding: 0;
+}
+
+.transaction {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.transaction:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.transaction-title {
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: #333;
+}
+
+.transaction-details {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Withdraw Form */
+.form {
+    gap: 1rem;
+}
+
+.inputDiv label {
+    color: #333;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 0.5rem 0;
+    display: block;
+}
+
+.inputDiv .input {
+    background: #F5F5F5;
+    padding: 1rem;
+    border-radius: 4px;
+    gap: 0.5rem;
+}
+
+.inputDiv input {
+    background: none;
+    outline: none;
+    border: none;
+    width: 100%;
+}
+
+/* Cards Section */
+.link {
+    color: #0066cc;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Divider */
+.divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 20px 0;
+}

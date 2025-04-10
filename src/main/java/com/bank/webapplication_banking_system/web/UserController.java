@@ -1,24 +1,19 @@
 package com.bank.webapplication_banking_system.web;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.bank.webapplication_banking_system.model.Transaction;
 import com.bank.webapplication_banking_system.model.User;
 import com.bank.webapplication_banking_system.repository.UserRepository;
 import com.bank.webapplication_banking_system.service.AccountService;
 import com.bank.webapplication_banking_system.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -43,7 +38,6 @@ public class UserController {
             String email = userData.get("email");
             String password = userData.get("password");
 
-            // Check if email already exists
             if (userRepository.findByEmail(email).isPresent()) {
                 response.put("success", false);
                 response.put("message", "Email already exists");
@@ -76,14 +70,28 @@ public class UserController {
             if (user.getEmail().equalsIgnoreCase(email) && user.getPassword().equals(password)) {
                 response.put("valid", true);
                 response.put("userId", user.getId());
+                response.put("message", "Login successful");
             } else {
                 response.put("valid", false);
+                response.put("message", "Invalid email or password");
             }
         } else {
             response.put("valid", false);
+            response.put("message", "User not found");
         }
 
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/api/users/{userId}")
+    @ResponseBody
+    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            return ResponseEntity.ok(userOptional.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/api/users/{userId}/transactions")
