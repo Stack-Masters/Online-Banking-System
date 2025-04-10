@@ -171,13 +171,14 @@ video {
 
 .loginPage .container .formDiv .forgotPassword a,
 .loginPage .container .formDiv .text a {
-    color: #C4A464; /* --primaryColor */
+    color: #1e51be; /* --primaryColor */
     font-weight: 500;
 }
 
 .loginPage .container .formDiv .forgotPassword a:hover,
 .loginPage .container .formDiv .text a:hover {
-    color: #FFFFFF; /* --hoverColor */
+    /*color: FFFFFF;  --hoverColor */
+    color: blue
 }
 
 /* Dashboard Styles */

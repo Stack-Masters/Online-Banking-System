@@ -4,22 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Banking System - Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link href="https://fonts.cdnfonts.com/css/now" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-    <div class="dashboard-container">
-        <div class="header">
-            <h2>Dashboard</h2>
-            <button id="logoutBtn" class="logout-btn">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3>Banking System</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-envelope"></i> Messages
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-university"></i> Accounts
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-exchange-alt"></i> Transfers
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-cloud-upload-alt"></i> Remote Deposits
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-money-bill-wave"></i> Cash
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-credit-card"></i> Card
+                </a>
+                <a href="#" id="logoutBtn" class="nav-item">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
         </div>
 
-        <p>Welcome to your dashboard! (This is a placeholder page)</p>
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="container">
+                <h1 id="userGreeting">Hi, User</h1>
+
+                <!-- Accounts Section -->
+                <div class="section">
+                    <h2>Accounts</h2>
+                    <div id="accountsList">
+                        <!-- Accounts will be populated here -->
+                    </div>
+                    <div class="divider"></div>
+                </div>
+
+                <!-- Transactions Section -->
+                <div class="section">
+                    <h2>Transactions</h2>
+                    <div id="transactionsList" class="transactions-list">
+                        <!-- Transactions will be populated here -->
+                    </div>
+                    <div class="divider"></div>
+                </div>
+
+                <!-- Withdraw Section -->
+                <div class="section">
+                    <h2>Withdraw</h2>
+                    <form id="withdrawForm" class="form grid">
+                        <span id="withdrawMessage" class="message"></span>
+                        <div class="inputDiv">
+                            <label for="withdrawAccountNumber">Account Number</label>
+                            <div class="input flex">
+                                <i class="fas fa-university icon"></i>
+                                <input type="text" id="withdrawAccountNumber" placeholder="Enter Account Number" required>
+                            </div>
+                        </div>
+                        <div class="inputDiv">
+                            <label for="withdrawAmount">Amount</label>
+                            <div class="input flex">
+                                <i class="fas fa-dollar-sign icon"></i>
+                                <input type="number" id="withdrawAmount" placeholder="Enter Amount" step="0.01" required>
+                            </div>
+                        </div>
+                        <div class="inputDiv">
+                            <label for="withdrawSecurityPin">Security Pin</label>
+                            <div class="input flex">
+                                <i class="fas fa-lock icon"></i>
+                                <input type="password" id="withdrawSecurityPin" placeholder="Enter Security Pin" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn flex">
+                            <span>Withdraw</span>
+                            <i class="fas fa-arrow-right icon"></i>
+                        </button>
+                    </form>
+                    <div class="divider"></div>
+                </div>
+
+                <!-- Cards Section -->
+                <div class="section">
+                    <h2>Cards</h2>
+                    <div class="link">See more</div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="js/dashboard.js"></script>
 </body>
 </html>
