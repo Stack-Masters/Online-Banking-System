@@ -37,7 +37,7 @@
     color: #FFFFFF;
     text-decoration: none;
     font-size: 1.1rem;
-    transition: background 0.3s;
+    transition: background 0.3s ease;
     position: relative;
 }
 
@@ -68,8 +68,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     min-height: 100vh;
+    position: relative;
 }
 
 .main-content .header {
@@ -96,6 +97,29 @@
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+}
+
+.main-content .header .user-icon:hover {
+    background: #A93226;
+}
+
+/* Success/Error Message Styling */
+.successMessage {
+    color: #28A745;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.operation-form .form .message:not(.successMessage) {
+    color: #DC3545;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
 }
 
 /* Accounts Section */
@@ -118,6 +142,12 @@
     border-radius: 8px;
     flex: 1;
     min-width: 200px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.account-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .account-item p {
@@ -142,6 +172,7 @@
     font-size: 1.1rem;
     display: inline-flex;
     align-items: center;
+    transition: background 0.3s ease;
 }
 
 .transfer-btn i {
@@ -178,14 +209,51 @@
 }
 
 .operation-form .form {
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
 }
 
-.operation-form .form .inputDiv input {
+.operation-form .form .inputDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.operation-form .form .inputDiv label {
+    color: #2E3839;
+    font-weight: bold;
+}
+
+.operation-form .form .inputDiv input,
+.operation-form .form .inputDiv select {
     background: #FFFFFF;
     border: 1px solid #dee2e6;
     border-radius: 5px;
     padding: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.operation-form .form .inputDiv input:focus,
+.operation-form .form .inputDiv select:focus {
+    border-color: #C0392B;
+    outline: none;
+}
+
+.operation-form .form button {
+    background: #C0392B;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.operation-form .form button:hover {
+    background: #A93226;
 }
 
 /* Transactions Section */
@@ -266,12 +334,73 @@
 
 .card-item {
     width: 300px;
+    height: 180px; /* Fixed height for consistent flipping */
     border-radius: 10px;
+    position: relative;
+    perspective: 1000px; /* Enable 3D space for flipping */
+    cursor: pointer; /* Indicate the card is clickable */
+}
+
+.card-flipper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease;
+    transform-style: preserve-3d;
+}
+
+.card-item.flipped .card-flipper {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hide the back face when not facing the user */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+}
+
+.card-front {
     background: linear-gradient(135deg, #003366, #1a1a1a);
     color: white;
-    padding: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    position: relative;
+}
+
+.card-back {
+    background: linear-gradient(135deg, #1a1a1a, #003366);
+    color: white;
+    transform: rotateY(180deg); /* Rotate the back to face away initially */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-back .magnetic-stripe {
+    background: #333;
+    height: 40px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.card-back .signature-strip {
+    background: #ddd;
+    height: 30px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    color: #555;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.card-back .cvv {
+    font-size: 14px;
+    text-align: right;
+    margin-right: 10px;
 }
 
 .card-content {
@@ -315,7 +444,7 @@
     top: 50px;
     right: 15px;
     font-size: 12px;
-    color: #00CED1; /* Cyan color for VISA */
+    color: #00CED1;
     font-weight: bold;
 }
 
@@ -344,22 +473,25 @@
 
 /* Account Overview Section */
 .account-overview-section {
-    margin-bottom: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 1200px;
-    flex-grow: 1;
+    max-width: 500px;
+    z-index: 1000;
 }
 
 .account-overview-card {
     background: #F5F6F5;
     border-radius: 8px;
     width: 100%;
-    max-width: 500px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .account-overview-content {
@@ -387,8 +519,62 @@
     margin-top: 15px;
     width: 100%;
     font-size: 1.1rem;
+    transition: background 0.3s ease;
 }
 
 .view-all-btn:hover {
     background: #A93226;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .sidebar .sidebar-nav .nav-item {
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+
+    .account-overview-section {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin: 20px 0;
+    }
+
+    .account-overview-card {
+        max-width: 100%;
+    }
+
+    .accounts-list,
+    .cards-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .account-item,
+    .card-item {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .withdraw-section,
+    .deposit-section,
+    .transfer-section,
+    .transactions-section,
+    .cards-section {
+        max-width: 100%;
+    }
 }
