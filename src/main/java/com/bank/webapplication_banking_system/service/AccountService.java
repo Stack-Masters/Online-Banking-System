@@ -35,31 +35,42 @@ public class AccountService {
         // Get the user's existing accounts
         List<Account> userAccounts = accountRepository.findByUserId(userId);
 
-        // Check account limits
-        long mainAccountCount = userAccounts.stream()
-                .filter(account -> account.getAccountType().equals("MAIN"))
-                .count();
-        long subAccountCount = userAccounts.stream()
-                .filter(account -> account.getAccountType().equals("SUB"))
-                .count();
+        // Check total account limit (max 3 accounts, including the main account)
+        if (userAccounts.size() >= 3) {
+            throw new RuntimeException("User has reached the limit of 3 accounts");
+        }
 
-        // If this is the first account, it must be a Main account
+        // Define allowed account types
+        List<String> allowedSubAccountTypes = List.of("SAVINGS", "EDUCATION", "INVESTMENT");
+        String mainAccountType = "CHECKING"; // Align with AccountController
+
+        // Check account type constraints
         if (userAccounts.isEmpty()) {
-            if (!accountType.equals("MAIN")) {
-                throw new RuntimeException("The first account must be a Main account");
+            // First account must be the main account
+            if (!accountType.equals(mainAccountType)) {
+                throw new RuntimeException("The first account must be a " + mainAccountType + " account");
             }
         } else {
-            // Enforce limits: 1 Main account, 3 Sub accounts
-            if (accountType.equals("MAIN") && mainAccountCount >= 1) {
-                throw new RuntimeException("User already has a Main account");
+            // Check for existing main account
+            long mainAccountCount = userAccounts.stream()
+                    .filter(account -> account.getAccountType().equals(mainAccountType))
+                    .count();
+            if (accountType.equals(mainAccountType) && mainAccountCount >= 1) {
+                throw new RuntimeException("User already has a " + mainAccountType + " account");
             }
-            if (accountType.equals("SUB") && subAccountCount >= 3) {
-                throw new RuntimeException("User has reached the limit of 3 Sub accounts");
+            // Validate sub-account type
+            if (!allowedSubAccountTypes.contains(accountType)) {
+                throw new RuntimeException("Invalid sub-account type. Allowed types are: " + allowedSubAccountTypes);
             }
         }
 
+        // Generate a unique account number
+        String accountNumber;
+        do {
+            accountNumber = "ACC" + new Random().nextInt(1000000);
+        } while (accountRepository.findByAccountNumber(accountNumber).isPresent());
+
         // Create the account
-        String accountNumber = "ACC" + new Random().nextInt(1000000);
         Account account = new Account();
         account.setUserId(userId);
         account.setAccountNumber(accountNumber);

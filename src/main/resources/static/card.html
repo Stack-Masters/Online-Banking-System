@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cards.css">
+</head>
+<body>
+    <div class="dashboardContent">
+        <!-- SIDEBAR -->
+        <section id="sidebar">
+            <a href="#" class="brand">
+                <i class='bx bxs-smile'></i>
+                <span class="text">AdminHub</span>
+            </a>
+            <ul class="side-menu top">
+                <li class="active">
+                    <a href="#" id="dashboardNav">
+                        <i class='bx bxs-dashboard'></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="depositNav">
+                        <i class='bx bx-money'></i>
+                        <span class="text">Deposit</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="withdrawNav">
+                        <i class='bx bx-wallet'></i>
+                        <span class="text">Withdraw</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="accountsNav">
+                        <i class='bx bx-briefcase-alt'></i>
+                        <span class="text">Accounts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="transactionsNav">
+                        <i class='bx bx-transfer-alt'></i>
+                        <span class="text">Transactions</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="cardsNav">
+                        <i class='bx bx-credit-card-alt'></i>
+                        <span class="text">Cards</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="side-menu">
+                <li>
+                    <a href="#">
+                        <i class='bx bxs-cog'></i>
+                        <span class="text">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="logout" id="logoutBtn">
+                        <i class='bx bxs-log-out-circle'></i>
+                        <span class="text">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <!-- SIDEBAR -->
+
+        <!-- CONTENT -->
+        <section id="content">
+            <!-- NAVBAR -->
+            <nav>
+                <i class='bx bx-menu'></i>
+                <a href="#" class="nav-link">Categories</a>
+                <form action="#">
+                    <div class="form-input">
+                        <input type="search" placeholder="Search...">
+                        <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+                    </div>
+                </form>
+                <input type="checkbox" id="switch-mode" hidden>
+                <label for="switch-mode" class="switch-mode"></label>
+                <a href="#" class="notification">
+                    <i class='bx bxs-bell'></i>
+                    <span class="num">8</span>
+                </a>
+                <a href="#" class="profile">
+                    <i class='bx bx-user'></i>
+                </a>
+            </nav>
+            <!-- NAVBAR -->
+
+            <!-- Main Dashboard -->
+            <main class="dashboardMain" id="dashboardSection">
+                <!-- Profile Card -->
+                <div class="profileCard">
+                    <div class="profileInfo">
+                        <h2 class="greeting">Account Overview</h2>
+                        <p><strong>Name:</strong> <span id="userName">Loading...</span></p>
+                        <p><strong>Balance:</strong> <span id="overviewBalance">$0.00</span></p>
+                        <p><strong>Account Number:</strong> <span id="overviewAccountNumber">N/A</span></p>
+                        <p><strong>Account Type:</strong> <span id="overviewAccountType">N/A</span></p>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Cards Section (Hidden by Default) -->
+            <main class="dashboardMain" id="cardsSection" style="display: none;">
+                <div class="profileCard">
+                    <div class="profileInfo">
+                        <h2 class="greeting">Your Cards</h2>
+                    </div>
+                </div>
+                <div class="cardsContainer" id="cardsContainer">
+                    <!-- Cards will be populated dynamically -->
+                </div>
+            </main>
+
+            <!-- Placeholder for Other Sections -->
+            <main class="dashboardMain" id="depositSection" style="display: none;">
+                <div class="profileCard">
+                    <h2 class="greeting">Deposit</h2>
+                    <!-- Add deposit form here if needed -->
+                </div>
+            </main>
+            <main class="dashboardMain" id="withdrawSection" style="display: none;">
+                <div class="profileCard">
+                    <h2 class="greeting">Withdraw</h2>
+                    <!-- Add withdraw form here if needed -->
+                </div>
+            </main>
+            <main class="dashboardMain" id="accountsSection" style="display: none;">
+                <div class="profileCard">
+                    <h2 class="greeting">Accounts</h2>
+                    <!-- Add accounts list here if needed -->
+                </div>
+            </main>
+            <main class="dashboardMain" id="transactionsSection" style="display: none;">
+                <div class="profileCard">
+                    <h2 class="greeting">Transactions</h2>
+                    <!-- Add transactions list here if needed -->
+                </div>
+            </main>
+        </section>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

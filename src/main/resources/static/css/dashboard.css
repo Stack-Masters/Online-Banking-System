@@ -37,7 +37,7 @@
     color: #FFFFFF;
     text-decoration: none;
     font-size: 1.1rem;
-    transition: background 0.3s;
+    transition: background 0.3s ease;
     position: relative;
 }
 
@@ -65,6 +65,12 @@
     flex: 1;
     padding: 30px;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    position: relative;
 }
 
 .main-content .header {
@@ -72,6 +78,8 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    width: 100%;
+    max-width: 1200px;
 }
 
 .main-content .header h2 {
@@ -89,11 +97,36 @@
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+}
+
+.main-content .header .user-icon:hover {
+    background: #A93226;
+}
+
+/* Success/Error Message Styling */
+.successMessage {
+    color: #28A745;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.operation-form .form .message:not(.successMessage) {
+    color: #DC3545;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
 }
 
 /* Accounts Section */
 .accounts-section {
     margin-bottom: 20px;
+    width: 100%;
+    max-width: 1200px;
 }
 
 .accounts-list {
@@ -109,6 +142,12 @@
     border-radius: 8px;
     flex: 1;
     min-width: 200px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.account-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .account-item p {
@@ -118,6 +157,9 @@
 /* Transfer Button */
 .transfer-button {
     margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 1200px;
 }
 
 .transfer-btn {
@@ -128,8 +170,9 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 1.1rem;
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    transition: background 0.3s ease;
 }
 
 .transfer-btn i {
@@ -140,69 +183,90 @@
     background: #A93226;
 }
 
-/* Forms Section */
-.forms-section {
+/* Withdraw, Deposit, and Transfer Sections */
+.withdraw-section,
+.deposit-section,
+.transfer-section {
     background: #F5F6F5;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
-}
-
-.forms-section h3 {
-    color: #2E3839;
-    margin-bottom: 15px;
-}
-
-.operations-container {
     display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
 }
 
-.operation-form {
-    flex: 1;
-    min-width: 300px;
+.centered-form {
+    width: 100%;
+    max-width: 400px;
 }
 
 .operation-form h4 {
     color: #2E3839;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .operation-form .form {
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
 }
 
-.operation-form .form .inputDiv input {
+.operation-form .form .inputDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.operation-form .form .inputDiv label {
+    color: #2E3839;
+    font-weight: bold;
+}
+
+.operation-form .form .inputDiv input,
+.operation-form .form .inputDiv select {
     background: #FFFFFF;
     border: 1px solid #dee2e6;
     border-radius: 5px;
     padding: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
 }
 
-/* Content Split: Left (Transactions/Messages) and Right (Account Overview) */
-.content-split {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+.operation-form .form .inputDiv input:focus,
+.operation-form .form .inputDiv select:focus {
+    border-color: #C0392B;
+    outline: none;
 }
 
-.left-content {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    min-width: 300px;
+.operation-form .form button {
+    background: #C0392B;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
 }
 
-.right-content {
-    flex: 1;
-    min-width: 300px;
+.operation-form .form button:hover {
+    background: #A93226;
 }
 
-.transactions-card,
-.messages-card,
-.account-overview-card {
+/* Transactions Section */
+.transactions-section {
+    background: #F5F6F5;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.transactions-card {
     background: #F5F6F5;
     border-radius: 8px;
 }
@@ -224,26 +288,20 @@
     color: #2E3839;
 }
 
-.transactions-list,
-.messages-list,
-.account-overview-content {
+.transactions-list {
     padding: 15px;
 }
 
-.transaction-item,
-.message-item {
+.transaction-item {
     padding: 10px 0;
     border-bottom: 1px solid #dee2e6;
 }
 
-.transaction-item:last-child,
-.message-item:last-child {
+.transaction-item:last-child {
     border-bottom: none;
 }
 
-.transaction-item p,
-.message-item p,
-.account-overview-content p {
+.transaction-item p {
     margin: 5px 0;
     color: #2E3839;
 }
@@ -252,19 +310,203 @@
     font-weight: bold;
 }
 
-.message-item h4 {
-    margin: 0;
-    color: #2E3839;
+/* Cards Section */
+.cards-section {
+    background: #F5F6F5;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 1200px;
 }
 
-.message-item span {
-    color: #777676;
-    font-size: 0.9rem;
+.cards-card {
+    background: #F5F6F5;
+    border-radius: 8px;
+}
+
+.cards-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 15px;
+}
+
+.card-item {
+    width: 300px;
+    height: 180px; /* Fixed height for consistent flipping */
+    border-radius: 10px;
+    position: relative;
+    perspective: 1000px; /* Enable 3D space for flipping */
+    cursor: pointer; /* Indicate the card is clickable */
+}
+
+.card-flipper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease;
+    transform-style: preserve-3d;
+}
+
+.card-item.flipped .card-flipper {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hide the back face when not facing the user */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+}
+
+.card-front {
+    background: linear-gradient(135deg, #003366, #1a1a1a);
+    color: white;
+}
+
+.card-back {
+    background: linear-gradient(135deg, #1a1a1a, #003366);
+    color: white;
+    transform: rotateY(180deg); /* Rotate the back to face away initially */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-back .magnetic-stripe {
+    background: #333;
+    height: 40px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.card-back .signature-strip {
+    background: #ddd;
+    height: 30px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    color: #555;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.card-back .cvv {
+    font-size: 14px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.account-type {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.bank-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.chip {
+    width: 30px;
+    height: auto;
+}
+
+.card-type {
+    position: absolute;
+    top: 50px;
+    right: 15px;
+    font-size: 12px;
+    color: #00CED1;
+    font-weight: bold;
+}
+
+.card-number {
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin: 10px 0;
+}
+
+.card-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.valid-thru {
+    font-size: 12px;
+}
+
+.cardholder {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: auto;
+}
+
+/* Account Overview Section */
+.account-overview-section {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    z-index: 1000;
+}
+
+.account-overview-card {
+    background: #F5F6F5;
+    border-radius: 8px;
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.account-overview-content {
+    padding: 15px;
+}
+
+.account-overview-content p {
+    margin: 8px 0;
+    color: #2E3839;
+    font-size: 1.1rem;
 }
 
 .account-overview-content p strong {
     display: inline-block;
-    width: 120px;
+    width: 150px;
 }
 
 .view-all-btn {
@@ -274,10 +516,65 @@
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 15px;
     width: 100%;
+    font-size: 1.1rem;
+    transition: background 0.3s ease;
 }
 
 .view-all-btn:hover {
     background: #A93226;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .sidebar .sidebar-nav .nav-item {
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+
+    .account-overview-section {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin: 20px 0;
+    }
+
+    .account-overview-card {
+        max-width: 100%;
+    }
+
+    .accounts-list,
+    .cards-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .account-item,
+    .card-item {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .withdraw-section,
+    .deposit-section,
+    .transfer-section,
+    .transactions-section,
+    .cards-section {
+        max-width: 100%;
+    }
 }

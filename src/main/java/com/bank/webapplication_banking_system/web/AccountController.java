@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,16 +66,7 @@ public class AccountController {
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Invalid userId format");
             }
-
-            // Extract and validate accountType
-            if (!accountData.containsKey("accountType")) {
-                throw new IllegalArgumentException("accountType is required");
-            }
-            String accountType = accountData.get("accountType").toString();
-            if (!accountType.equals("CHECKING")) {
-                throw new IllegalArgumentException("Main account must be of type CHECKING");
-            }
-
+    
             // Extract and validate securityPin
             if (!accountData.containsKey("securityPin")) {
                 throw new IllegalArgumentException("securityPin is required");
@@ -83,27 +75,26 @@ public class AccountController {
             if (securityPin.trim().isEmpty()) {
                 throw new IllegalArgumentException("securityPin cannot be empty");
             }
-
-            // Generate a random account number
-            String accountNumber = String.format("%010d", new Random().nextInt(1000000000));
-
-            // Create the account with balance set to 0.00
-            Account account = new Account();
-            account.setUserId(userId);
-            account.setAccountType(accountType);
-            account.setAccountNumber(accountNumber);
-            account.setBalance(BigDecimal.ZERO); // Set balance to 0.00
-            account.setSecurityPin(securityPin);
-
-            accountRepository.save(account);
-
+    
+            // Create the main account using AccountService
+            Account account = accountService.createAccount(userId, securityPin, "CHECKING");
+    
             response.put("success", true);
             response.put("message", "Main Account created successfully");
+            response.put("accountNumber", account.getAccountNumber());
             return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            response.put("success", false);
+            response.put("message", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        } catch (RuntimeException e) {
+            response.put("success", false);
+            response.put("message", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
         } catch (Exception e) {
             response.put("success", false);
-            response.put("message", "Failed to create Main Account: " + e.getMessage());
-            return ResponseEntity.badRequest().body(response);
+            response.put("message", "Unexpected error: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
 
@@ -159,4 +150,59 @@ public class AccountController {
             return ResponseEntity.badRequest().body("Transfer failed: " + e.getMessage());
         }
     }
+
+
+   @PostMapping("/api/accounts/create-sub")
+@ResponseBody
+public ResponseEntity<Map<String, Object>> createSubAccount(@RequestBody Map<String, Object> accountData) {
+    Map<String, Object> response = new HashMap<>();
+    try {
+        // Extract and validate userId
+        if (!accountData.containsKey("userId")) {
+            throw new IllegalArgumentException("userId is required");
+        }
+        Long userId;
+        try {
+            userId = Long.parseLong(accountData.get("userId").toString());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid userId format");
+        }
+
+        // Extract and validate accountType
+        if (!accountData.containsKey("accountType")) {
+            throw new IllegalArgumentException("accountType is required");
+        }
+        String accountType = accountData.get("accountType").toString().toUpperCase();
+
+        // Extract and validate securityPin
+        if (!accountData.containsKey("securityPin")) {
+            throw new IllegalArgumentException("securityPin is required");
+        }
+        String securityPin = accountData.get("securityPin").toString();
+        if (securityPin.trim().isEmpty()) {
+            throw new IllegalArgumentException("securityPin cannot be empty");
+        }
+
+        // Create the sub-account using AccountService
+        Account account = accountService.createAccount(userId, securityPin, accountType);
+
+        response.put("success", true);
+        response.put("message", "Sub-account created successfully");
+        response.put("accountNumber", account.getAccountNumber());
+        return ResponseEntity.ok(response);
+    } catch (IllegalArgumentException e) {
+        response.put("success", false);
+        response.put("message", e.getMessage());
+        return ResponseEntity.badRequest().body(response);
+    } catch (RuntimeException e) {
+        response.put("success", false);
+        response.put("message", e.getMessage());
+        return ResponseEntity.badRequest().body(response);
+    } catch (Exception e) {
+        response.put("success", false);
+        response.put("message", "Unexpected error: " + e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+}
+
 }
