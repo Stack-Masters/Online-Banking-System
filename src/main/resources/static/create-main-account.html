@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking System - Create Main Account</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/create-main-account.css">
+    <link href="https://fonts.cdnfonts.com/css/now" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="loginPage flex">
+        <div class="container flex">
+            <div class="videoDiv">
+                <video src="assets/video.mp4" autoplay muted loop></video>
+            </div>
+
+            <div class="formDiv flex">
+                <div class="headerDiv">
+                    <h3>Create Your Main Account</h3>
+                </div>
+                <form id="createMainAccountForm" class="form grid">
+                    <span id="errorMessage" class="message">Account Creation Status Will go here</span>
+                    <div class="inputDiv">
+                        <label for="accountType">Account Type</label>
+                        <div class="input flex">
+                            <i class="fas fa-university icon"></i>
+                            <input type="text" id="accountType" value="CHECKING" readonly>
+                        </div>
+                    </div>
+                    <div class="inputDiv">
+                        <label for="securityPin">Security Pin</label>
+                        <div class="input flex">
+                            <i class="fas fa-lock icon"></i>
+                            <input type="password" id="securityPin" placeholder="Enter Security Pin" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn flex">
+                        <span>Create Account</span>
+                        <i class="fas fa-arrow-right icon"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/create-main-account.js"></script>
+</body>
+</html>

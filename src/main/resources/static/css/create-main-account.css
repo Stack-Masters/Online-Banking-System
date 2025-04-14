@@ -1,0 +1,5 @@
+.formDiv .form .inputDiv input[readonly] {
+    background: #e9ecef;
+    cursor: not-allowed;
+}
+

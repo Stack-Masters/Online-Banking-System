@@ -8,11 +8,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Table(name = "account")
-@Data
+@Table(name = "accounts")
+@Getter
+@Setter
 public class Account {
 
     @Id
@@ -26,11 +28,24 @@ public class Account {
     private String accountNumber;
 
     @Column(name = "account_type", nullable = false)
-    private String accountType; // "MAIN" or "SUB"
+    private String accountType;
 
-    @Column(nullable = false)
+    @Column(name = "balance", nullable = false)
     private BigDecimal balance;
 
-    @Column(name = "security_pin", nullable = false)
+    @Column(name = "security_pin")
     private String securityPin;
+
+    // Default constructor
+    public Account() {
+    }
+
+    // Constructor with fields (optional)
+    public Account(Long userId, String accountNumber, String accountType, BigDecimal balance, String securityPin) {
+        this.userId = userId;
+        this.accountNumber = accountNumber;
+        this.accountType = accountType;
+        this.balance = balance;
+        this.securityPin = securityPin;
+    }
 }
