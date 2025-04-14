@@ -22,13 +22,23 @@ document.addEventListener('DOMContentLoaded', async function () {
         const accountsList = document.getElementById('accountsList');
         accountsList.innerHTML = '';
 
+        // Populate Account Overview
+        const overviewBalance = document.getElementById('overviewBalance');
+        const overviewAccountNumber = document.getElementById('overviewAccountNumber');
+        const overviewAccountType = document.getElementById('overviewAccountType');
+        const viewAllAccountsBtn = document.getElementById('viewAllAccountsBtn');
+
         if (accounts.length === 0) {
             accountsList.innerHTML = '<p>No accounts found.</p>';
+            overviewBalance.textContent = '$0.00';
+            overviewAccountNumber.textContent = 'N/A';
+            overviewAccountType.textContent = 'N/A';
+            viewAllAccountsBtn.style.display = 'none';
         } else {
+            // Display accounts in the accounts list
             accounts.forEach(account => {
                 const accountDiv = document.createElement('div');
                 accountDiv.classList.add('account-item');
-                // Convert balance string to number for formatting
                 const balance = parseFloat(account.balance);
                 accountDiv.innerHTML = `
                     <p>${account.accountType} x${account.accountNumber.slice(-4)}</p>
@@ -37,6 +47,28 @@ document.addEventListener('DOMContentLoaded', async function () {
                 `;
                 accountsList.appendChild(accountDiv);
             });
+
+            // Populate Account Overview with the first account
+            const firstAccount = accounts[0];
+            const balance = parseFloat(firstAccount.balance);
+            overviewBalance.textContent = `$${balance.toFixed(2)}`;
+            // Mask the account number (show only last 4 digits)
+            const maskedAccountNumber = '**** **** **** ' + firstAccount.accountNumber.slice(-4);
+            overviewAccountNumber.textContent = maskedAccountNumber;
+            overviewAccountType.textContent = firstAccount.accountType;
+
+            // Show "View All Accounts" button if there are multiple accounts
+            if (accounts.length > 1) {
+                viewAllAccountsBtn.style.display = 'block';
+                viewAllAccountsBtn.addEventListener('click', function () {
+                    // For now, just log the action; later, we can redirect to an accounts page
+                    console.log('View All Accounts clicked');
+                    // Optionally redirect to an accounts page (e.g., accounts.html)
+                    // window.location.href = 'accounts.html';
+                });
+            } else {
+                viewAllAccountsBtn.style.display = 'none';
+            }
         }
     } catch (err) {
         console.error('Error fetching accounts:', err);
@@ -55,7 +87,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             transactions.forEach(transaction => {
                 const transactionDiv = document.createElement('div');
                 transactionDiv.classList.add('transaction-item');
-                // Convert amount string to number for formatting
                 const amount = parseFloat(transaction.amount);
                 const amountPrefix = transaction.transactionType === 'DEPOSIT' ? '+' : '-';
                 transactionDiv.innerHTML = `
