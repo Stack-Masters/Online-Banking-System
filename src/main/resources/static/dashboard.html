@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking System - Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="https://fonts.cdnfonts.com/css/now" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3>Banking System</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-money-check-alt"></i> Withdrawals
+                    <span class="badge">1</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-university"></i> Accounts
+                </a>
+                <a href="#" class="nav-item" id="transferNav">
+                    <i class="fas fa-exchange-alt"></i> Transfers
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-cloud-download-alt"></i> Remote deposits
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-money-bill-wave"></i> Cash
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-credit-card"></i> Cards
+                </a>
+                <a href="#" id="logoutBtn" class="nav-item">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h2>Hi, <span id="userName">User</span></h2>
+                <div class="user-icon">JH</div>
+            </div>
+
+            <!-- Accounts Section -->
+            <div class="section accounts-section">
+                <div id="accountsList" class="accounts-list">
+                    <!-- Accounts will be populated here -->
+                </div>
+            </div>
+
+            <!-- Transfer Button -->
+            <div class="transfer-button">
+                <button id="toggleFormsBtn" class="transfer-btn">
+                    <i class="fas fa-exchange-alt"></i> Transfer
+                </button>
+            </div>
+
+            <!-- Forms Section (Hidden by Default) -->
+            <div id="formsSection" class="section forms-section" style="display: none;">
+                <h3>Account Operations</h3>
+                <div class="operations-container">
+                    <!-- Deposit Form -->
+                    <div class="operation-form">
+                        <h4>Deposit</h4>
+                        <form id="depositForm" class="form grid">
+                            <span id="depositMessage" class="message"></span>
+                            <div class="inputDiv">
+                                <label for="depositAccountNumber">Account Number</label>
+                                <div class="input flex">
+                                    <i class="fas fa-university icon"></i>
+                                    <input type="text" id="depositAccountNumber" placeholder="Enter Account Number" required>
+                                </div>
+                            </div>
+                            <div class="inputDiv">
+                                <label for="depositAmount">Amount</label>
+                                <div class="input flex">
+                                    <i class="fas fa-dollar-sign icon"></i>
+                                    <input type="number" id="depositAmount" placeholder="Enter Amount" step="0.01" required>
+                                </div>
+                            </div>
+                            <div class="inputDiv">
+                                <label for="depositSecurityPin">Security Pin</label>
+                                <div class="input flex">
+                                    <i class="fas fa-lock icon"></i>
+                                    <input type="password" id="depositSecurityPin" placeholder="Enter Security Pin" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn flex">
+                                <span>Deposit</span>
+                                <i class="fas fa-arrow-right icon"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Withdraw Form -->
+                    <div class="operation-form">
+                        <h4>Withdraw</h4>
+                        <form id="withdrawForm" class="form grid">
+                            <span id="withdrawMessage" class="message"></span>
+                            <div class="inputDiv">
+                                <label for="withdrawAccountNumber">Account Number</label>
+                                <div class="input flex">
+                                    <i class="fas fa-university icon"></i>
+                                    <input type="text" id="withdrawAccountNumber" placeholder="Enter Account Number" required>
+                                </div>
+                            </div>
+                            <div class="inputDiv">
+                                <label for="withdrawAmount">Amount</label>
+                                <div class="input flex">
+                                    <i class="fas fa-dollar-sign icon"></i>
+                                    <input type="number" id="withdrawAmount" placeholder="Enter Amount" step="0.01" required>
+                                </div>
+                            </div>
+                            <div class="inputDiv">
+                                <label for="withdrawSecurityPin">Security Pin</label>
+                                <div class="input flex">
+                                    <i class="fas fa-lock icon"></i>
+                                    <input type="password" id="withdrawSecurityPin" placeholder="Enter Security Pin" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn flex">
+                                <span>Withdraw</span>
+                                <i class="fas fa-arrow-right icon"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Transfer Form -->
+                    <div class="operation-form">
+                        <h4>Transfer</h4>
+                        <form id="transferForm" class="form grid">
+                            <span id="transferMessage" class="message"></span>
+                            <div class="inputDiv">
+                                <label for="fromAccountNumber">From Account Number</label>
+                                <div class="input flex">
+                                    <i class="fas fa-university icon"></i>
+                                    <input type="text" id="fromAccountNumber" placeholder="Enter From Account Number" required>
+                                </div>
+                            </div>
+                            <div class="inputDiv">
+                                <label for="toAccountNumber">To Account Number</label>
+                                <div class="input flex">
+                                    <i class="fas fa-university icon"></i>
+                                    <input type="text" id="toAccountNumber" placeholder="Enter To Account Number" required>
+                                </div>
+                            </div>
+                            <div class="inputDiv">
+                                <label for="transferAmount">Amount</label>
+                                <div class="input flex">
+                                    <i class="fas fa-dollar-sign icon"></i>
+                                    <input type="number" id="transferAmount" placeholder="Enter Amount" step="0.01" required>
+                                </div>
+                            </div>
+                            <div class="inputDiv">
+                                <label for="transferSecurityPin">Security Pin</label>
+                                <div class="input flex">
+                                    <i class="fas fa-lock icon"></i>
+                                    <input type="password" id="transferSecurityPin" placeholder="Enter Security Pin" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn flex">
+                                <span>Transfer</span>
+                                <i class="fas fa-arrow-right icon"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Split: Transactions/Messages on Left, Account Overview on Right -->
+            <div class="section content-split">
+                <div class="left-content">
+                    <!-- Transactions -->
+                    <div class="card transactions-card">
+                        <div class="card-header">
+                            <h3>Transactions</h3>
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div id="transactionsList" class="transactions-list">
+                            <!-- Transactions will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Messages -->
+                    <div class="card messages-card">
+                        <div class="card-header">
+                            <h3>Messages</h3>
+                            <i class="fas fa-ellipsis-v"></i>
+                        </div>
+                        <div class="messages-list">
+                            <div class="message-item">
+                                <h4>Mobile App – New Look</h4>
+                                <p>The next time you use NorthBank Mobile Banking App, you’ll notice...</p>
+                                <span>Jan 3</span>
+                            </div>
+                            <div class="message-item">
+                                <h4>Bill pay</h4>
+                                <p>Bill pay</p>
+                                <span>Dec 31</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Overview -->
+                <div class="right-content">
+                    <div class="card account-overview-card">
+                        <div class="card-header">
+                            <h3>Account Overview</h3>
+                        </div>
+                        <div class="account-overview-content">
+                            <p><strong>Current Balance:</strong> <span id="overviewBalance">$0.00</span></p>
+                            <p><strong>Account Number:</strong> <span id="overviewAccountNumber">**** **** **** 0000</span></p>
+                            <p><strong>Account Type:</strong> <span id="overviewAccountType">Checking</span></p>
+                            <button id="viewAllAccountsBtn" class="btn view-all-btn" style="display: none;">View All Accounts</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
